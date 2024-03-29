@@ -1,3 +1,3 @@
 # Завдання 1
 
-![](\images\test.png)
+<img align="center" width="60%" height="60%" src="images/test.png">
