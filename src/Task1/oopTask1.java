@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package pkg34.yatsenko.ooppractice;
+package Task1;
 
 /**
  *
  * @author Trap
  */
-public class YatsenkoOOPpractice {
+public class oopTask1 {
 
     /**
      * @param args the command line arguments
