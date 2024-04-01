@@ -8,10 +8,12 @@ import Task2.Calc;
 import static org.junit.Assert.assertTrue;
 
 /**
- *
- * @author Trap
+ * Виконує тестування розроблених класів
+ * 
+ * @author Яценко Віталій
  */
 public class MainTest {
+    /** Перевірка основного функціоналу класу {@linkplain Calc}*/
     @Test
     public void testCalc(){
         Calc calc = new Calc();
@@ -22,7 +24,7 @@ public class MainTest {
         calc.init(10000, 1);
         assertTrue(calc.getResult().getSCells() != 10000);
     }
-    
+    /** Перевірка серіалізації, коректності відновлених даних*/
     @Test
     public void testRestore(){
         Calc calc = new Calc();
