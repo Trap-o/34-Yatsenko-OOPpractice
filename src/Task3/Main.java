@@ -1,33 +1,34 @@
-package Task2;
+package Task3;
 
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Scanner;
 
 /** Обрахунок та показ результатів
  * Містить реалізацію статичного методу main()
  * 
  * @author Яценко Віталій
- * @see Main#main(java.lang.String[]) 
+ * @see Main#main 
  */
 public class Main {
-    /** Об'єкт класу {@linkplain Calc}.<br>Вирішує поставлену задачу */
-    private Calc calc = new Calc();
-    
-    /** Об'єкт класу {@linkplain Scanner}
-     * <br>Використовується для вводу кількості клітин та циклів
+    /** Об'єкт, що реалізує інтерфейс  {@linkplain View}
+     * обслуговує колекцію об'єктів {@linkplain Task2.Item2d}
      */
-    Scanner scan = new Scanner(System.in);
+    private View view;
+    
+    /** Ініціалізує поле {@linkplain Main#view view} */
+    public Main(View view){
+        this.view = view;
+    }
     
     /** Показ меню */
-    private void menu(){
+    protected void menu(){
             String s = null;
             BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
             do{
                 do{
                     System.out.println("\nEnter command");
-                    System.out.print("'i'nput, 'v'iew, 's'ave, 'r'estore, 'q'uit: ");
+                    System.out.print("'g'enerate, 'v'iew, 's'ave, 'r'estore, 'q'uit: ");
                     try{
                         s = in.readLine();
                     } catch(IOException e){
@@ -38,34 +39,31 @@ public class Main {
                 switch (s.charAt(0)){
                     case 'v' -> {
                         System.out.println("\nView current.");
-                        calc.show();
+                        view.viewShow();
                     }
-                    case 'i' -> {
-                        System.out.println("\nInput values.");
-                        System.out.println("Number of primary cells: ");
-                        int pc = scan.nextInt();
-                        System.out.println("Number of cycles: ");
-                        int cyc = scan.nextInt();
-                        calc.init(pc, cyc);
-                        calc.show();
+                    case 'g' -> {
+                        System.out.println("\nGenerate random values.");
+                        view.viewInit();
+                        view.viewShow();
+                    break;
                     }
                     case 's' -> {
                         System.out.println("\nSave current.");
                         try{
-                            calc.save();
+                            view.viewSave();
                         } catch(IOException e){
                             System.out.println("Serialization error " + e);
                         }
-                        calc.show();
+                        view.viewShow();
                     }
                     case 'r' -> {
                         System.out.println("\nRestore last saved.");
                         try{
-                            calc.restore();
+                            view.viewRestore();
                         } catch(Exception e){
                             System.out.println("Serialization error " + e);
                         }
-                        calc.show();
+                        view.viewShow();
                     }
                     case 'q' -> System.out.println("\nExit...");
                     default -> System.out.println("Wrong command.");
@@ -76,10 +74,11 @@ public class Main {
     /** Виконується при запуску програми
     * Обраховується кількість клітин, що вижили на заданому циклі поділу після бінарного поділу
     * Результати обчислень виводяться на екран
+    * Викликає метод {@linkplain Main#menu() menu()}
     * @param args - параметри запуску програми
     */
     public static void main(String[] args) {
-        Main main = new Main();
+        Main main = new Main(new ViewableResult().getView());
         main.menu();
     }
 }

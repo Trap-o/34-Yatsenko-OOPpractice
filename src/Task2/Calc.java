@@ -59,7 +59,7 @@ public class Calc {
             
             deathrate = random.nextDouble() * (maxDeathrate - minDeathrate) + minDeathrate;
             survivalrate = 1 - deathrate; 
-            survivingCells *= survivalrate;
+            survivingCells = (int)(survivingCells * survivalrate)
         }
         return survivingCells;
     }
