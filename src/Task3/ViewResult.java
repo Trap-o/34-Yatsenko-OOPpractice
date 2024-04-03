@@ -85,7 +85,7 @@ public class ViewResult implements View{
      * @param stepCyc крок збільшення кількості циклів
      */
     public void init(int stepPC, int stepCyc){
-        int primaryCells = 0, cycles = 0;
+        int primaryCells = 1000, cycles = 1;
         for(Item2d item : items){
             item.setCyclesAndPSCells(primaryCells, cycles, calc(primaryCells, cycles));
             primaryCells += stepPC;
@@ -100,7 +100,7 @@ public class ViewResult implements View{
     @Override
     public void viewInit(){
         Random random = new Random();
-        init(random.nextInt(1001), random.nextInt(2));
+        init(random.nextInt(10001), random.nextInt(11));
     }
     
     /** Реалізація методу {@linkplain View#viewSave()}<br>

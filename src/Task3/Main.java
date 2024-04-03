@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-/** Обрахунок та показ результатів
+/** Обрахунок та показ результатів <br>
  * Містить реалізацію статичного методу main()
  * 
  * @author Яценко Віталій
