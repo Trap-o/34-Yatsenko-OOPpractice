@@ -2,11 +2,10 @@ package Tests;
 
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import junit.framework.Assert;
-import java.io.IOException;
 import Task2.Item2d;
-import Task4.ViewTable;
+import Task3.ViewResult;
+import Task5.ChangeConsoleCommand;
+import Task5.ChangeItemCommand;
 import java.util.Random;
 
 
@@ -16,42 +15,32 @@ import java.util.Random;
  * @author Яценко Віталій
  */
 public class MainTest {
-    /** Перевірка основного функціоналу класу {@linkplain ViewTable}*/
+    /** Перевірка основного функціоналу методу {@linkplain ChangeItemCommand#execute()} */
     @Test
-    public void testCalc(){
+    public void testExecute(){
         
-        ViewTable tbl = new ViewTable(10, 5);
-        assertEquals(10, tbl.getWidth());
-        assertEquals(5, tbl.getItems().size());
-        
-        tbl.init(50, 100, 3);
-        Item2d item = new Item2d();
-        item.setCyclesAndPSCells(0, 0, 0);
-        assertEquals(0, tbl.calc(0, 0));
-        assertEquals(1000, tbl.calc(1000, 0));
-        assertTrue(tbl.calc(10000, 1) != 10000);
-        
-    }
-    /** Перевірка серіалізації, коректності відновлених даних*/
-    @Test
-    public void testRestore(){
         Random random = new Random();
-        ViewTable tbl1 = new ViewTable(10, 1000);
-        ViewTable tbl2 = new ViewTable();
-        
-        tbl1.init(random.nextInt(10001), random.nextInt(5));
-        try{
-            tbl1.viewSave();
-        } catch (IOException e){
-            Assert.fail(e.getMessage());
+        ChangeItemCommand cmd = new ChangeItemCommand();
+        cmd.setItem(new Item2d());
+        int primaryCells, cycles, survivingCells, offset;
+        for(int ctr = 0; ctr < 1000; ctr++){
+            cmd.getItem().setCyclesAndPSCells(primaryCells = random.nextInt(1001), cycles = random.nextInt(1001), survivingCells = random.nextInt(1001));
+            cmd.setOffset(offset = random.nextInt(1001));
+            cmd.execute();
+            assertEquals(primaryCells, cmd.getItem().getPCells());
+            assertEquals(cycles, cmd.getItem().getCycles());
+            assertEquals(survivingCells * offset, cmd.getItem().getSCells());
         }
+    }
+    
+    /** Перевірка класа {@linkplain ChangeConsoleCommand} */
+    @Test
+    public void testChangeConsoleCommand(){
         
-        try{
-            tbl2.viewRestore();
-        } catch (Exception e){
-            Assert.fail(e.getMessage());
-        }
-        
-        assertEquals(tbl1.getItems().size(), tbl2.getItems().size());
+        ChangeConsoleCommand cmd = new ChangeConsoleCommand(new ViewResult());
+        cmd.getView().viewInit();
+        cmd.execute();
+        assertEquals("'c'hange", cmd.toString());
+        assertEquals('c', cmd.getKey());
     }
 }
