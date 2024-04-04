@@ -28,7 +28,7 @@ public class UndoCommand {
         this.view = view;
     }
     
-    public void undoWrite() throws IOException, ClassNotFoundException{
+    public void undoWrite() throws IOException, ClassNotFoundException, Exception{
         items = ((ViewResult) view).getItems();
         undoRewrite();
         ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(SNAME));
@@ -37,25 +37,26 @@ public class UndoCommand {
         os.close();
     }
     
-    public void undoRewrite() throws IOException, ClassNotFoundException{
+    @SuppressWarnings("unchecked")
+    public void undoRewrite() throws Exception, ClassNotFoundException{
         items = ((ViewResult) view).getItems();
         ObjectInputStream is = new ObjectInputStream(new FileInputStream(SNAME));
-        items = (ArrayList<Item2d>)is.readObject();
+        items = (ArrayList<Item2d>) is.readObject();
         is.close();
-        
+
         ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(UNAME));
         os.writeObject(items);
         os.flush();
         os.close();
     }
 
-    public void Undo() throws IOException, Exception{
-        try{
+    @SuppressWarnings("unchecked")
+    public void undo() throws Exception {
+        try {
             ObjectInputStream is = new ObjectInputStream(new FileInputStream(UNAME));
-            items = (ArrayList<Item2d>)is.readObject();
+            items = (ArrayList<Item2d>) is.readObject();
             is.close();
-        } catch(ClassNotFoundException e){
-            System.err.println("Serialization error: " + e);
+        } catch (ClassNotFoundException ex) {
         }
     }
 }

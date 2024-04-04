@@ -12,7 +12,7 @@ public class UndoConsoleCommand implements ConsoleCommand {
     /** Об'єкт, що реалізує інтерфейс {@linkplain View};
      * обслуговує колекцію об'єктів {@linkplain Task2.Item2d}
      */
-    private View view;
+    private final View view;
     
     /** Ініціалізує поле {@linkplain UndoConsoleCommand#view}
      * @param view об'єкт, що реалізує інтерфейс {@linkplain View}
@@ -31,11 +31,12 @@ public class UndoConsoleCommand implements ConsoleCommand {
         return "'u'ndo";
     }
     
+    @Override
     public void execute(){
+        UndoCommand cmd = new UndoCommand(view);
         System.out.println("Undo last command.");
         try{
-            UndoCommand cmd = new UndoCommand(view);
-            cmd.Undo();
+            cmd.undo();
         } catch(Exception e){
             System.err.println("Serialization error: " + e);
         }

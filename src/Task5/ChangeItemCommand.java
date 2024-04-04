@@ -1,6 +1,7 @@
 package Task5;
 
 import Task2.Item2d;
+import Task3.ViewResult;
 
 /** Rоманда Change item;
 * шаблон Command
@@ -47,6 +48,7 @@ public class ChangeItemCommand implements Command {
     
     @Override
     public void execute(){
+        //ViewResult view = new ViewResult();
         item.setSCells(item.getSCells() * offset);
     }
 }
