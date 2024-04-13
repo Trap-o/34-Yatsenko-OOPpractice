@@ -48,7 +48,9 @@ public class ChangeItemCommand implements Command {
     
     @Override
     public void execute(){
-        //ViewResult view = new ViewResult();
-        item.setSCells(item.getSCells() * offset);
+        ViewResult view = new ViewResult();
+        item.setPCells(item.getPCells()* offset);
+        item.setCycles(item.getCycles()* offset);
+        item.setSCells(view.calc(item.getPCells(), item.getCycles()));
     }
 }

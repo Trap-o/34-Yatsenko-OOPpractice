@@ -4,7 +4,6 @@ import Task3.View;
 
 /** Консольна команда restore
 * шаблон Command
-* 
 * @author Яценко Віталій
 */
 public class RestoreConsoleCommand implements ConsoleCommand{

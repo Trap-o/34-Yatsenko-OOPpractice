@@ -7,7 +7,6 @@ import java.util.Random;
 
 /** Консольна команда Change item;
 * шаблон Command
-* 
 * @author Яценко Віталій
 */
 public class ChangeConsoleCommand extends ChangeItemCommand implements ConsoleCommand {
@@ -51,10 +50,16 @@ public class ChangeConsoleCommand extends ChangeItemCommand implements ConsoleCo
     
     public void execute(){
         Random random = new Random();
-        System.out.println("Change item: scale factor " + setOffset(random.nextInt(11)));
+        System.out.println("Change item: scale factor " + setOffset(random.nextInt(3) + 1));
         for(Item2d item : ((ViewResult)view).getItems()){
-            super.setItem(item);
-            super.execute();
+            if(item.getPCells() > 300000){
+                System.out.println("Maximum amount of cells");
+                break;
+            }
+            else{
+                super.setItem(item);
+                super.execute();
+            }
         }
         view.viewShow();
     }

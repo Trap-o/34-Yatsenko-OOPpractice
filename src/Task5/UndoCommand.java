@@ -10,10 +10,11 @@ import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import Task3.ViewResult;
 
-/**
- *
- * @author Trap
- */
+/** Консольна команда save
+* шаблон Command
+* 
+* @author Яценко Віталій
+*/
 public class UndoCommand {
     
     private static final String SNAME = "undosave.bin";
@@ -30,14 +31,12 @@ public class UndoCommand {
     
     public void undoWrite() throws IOException, ClassNotFoundException, Exception{
         items = ((ViewResult) view).getItems();
-        undoRewrite();
         ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(SNAME));
         os.writeObject(items);
         os.flush();
         os.close();
     }
     
-    @SuppressWarnings("unchecked")
     public void undoRewrite() throws Exception, ClassNotFoundException{
         items = ((ViewResult) view).getItems();
         ObjectInputStream is = new ObjectInputStream(new FileInputStream(SNAME));
@@ -50,13 +49,13 @@ public class UndoCommand {
         os.close();
     }
 
-    @SuppressWarnings("unchecked")
     public void undo() throws Exception {
         try {
             ObjectInputStream is = new ObjectInputStream(new FileInputStream(UNAME));
             items = (ArrayList<Item2d>) is.readObject();
             is.close();
         } catch (ClassNotFoundException ex) {
+            System.err.println("ClassNotFoundException error: " + ex);
         }
     }
 }

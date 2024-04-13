@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 
 /** Обрахунок та показ результатів <br>
  * Містить реалізацію статичного методу main()
- * 
  * @author Яценко Віталій
  * @see Main#main 
  */
@@ -15,12 +14,10 @@ public class Main {
      * обслуговує колекцію об'єктів {@linkplain Task2.Item2d}
      */
     private View view;
-    
     /** Ініціалізує поле {@linkplain Main#view view} */
     public Main(View view){
         this.view = view;
     }
-    
     /** Показ меню */
     protected void menu(){
             String s = null;

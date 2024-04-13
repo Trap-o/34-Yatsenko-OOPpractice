@@ -5,7 +5,7 @@ import Task4.ViewableTable;
 
 /** Формує та відображає меню
  * Реалізує шаблон Singleton
- * @author Trap
+ * @author Яценко Віталій
  */
 public class Application {
     

@@ -12,23 +12,19 @@ import Task5.UndoConsoleCommand;
 
 /** Обрахунок та показ результатів <br>
  * Містить реалізацію статичного методу main()
- * 
  * @author Яценко Віталій
  * @see Main#main 
  */
 public class Main {
-    
     /** Об'єкт, що реалізує інтерфейс {@linkplain View};
      * обслуговує колекцію об'єктів {@linkplain Task2.Item2d};
      * ініціалізується за допомогою Factory Method
      */
     private View view = new ViewableResult().getView();
-    
     /** Об'єкт класа {@linkplain Menu};
      * макрокоманда (шаблон Command)
      */
     private Menu menu = new Menu();
-    
     /** Обробка команд користувача */
     public void run() {
         menu.add(new GenerateConcoleCommand(view));

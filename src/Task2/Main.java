@@ -14,12 +14,10 @@ import java.util.Scanner;
 public class Main {
     /** Об'єкт класу {@linkplain Calc}.<br>Вирішує поставлену задачу */
     private Calc calc = new Calc();
-    
     /** Об'єкт класу {@linkplain Scanner}
      * <br>Використовується для вводу кількості клітин та циклів
      */
     Scanner scan = new Scanner(System.in);
-    
     /** Показ меню */
     private void menu(){
             String s = null;
@@ -72,7 +70,6 @@ public class Main {
                 }
             }while(s.charAt(0) != 'q');
     }
-
     /** Виконується при запуску програми
     * Обраховується кількість клітин, що вижили на заданому циклі поділу після бінарного поділу
     * Результати обчислень виводяться на екран
